@@ -25,7 +25,7 @@ function AccordionItem({
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between py-4 text-left"
       >
-        <span className="text-sm font-medium">{title}</span>
+        <span className="text-sm font-semibold">{title}</span>
         <ChevronDown
           className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
@@ -54,20 +54,49 @@ export default function ProductAccordion({ description, details }: ProductAccord
         </AccordionItem>
       )}
 
+      <AccordionItem title="Technical Specifications">
+        <div className="space-y-2">
+          {[
+            { label: 'Battery', value: '4000mAh Lithium-Ion' },
+            { label: 'Speeds', value: '5 levels + Turbo Blast' },
+            { label: 'Run Time', value: 'Up to 12 hours (Speed 1)' },
+            { label: 'Charging', value: 'USB-C, ~3 hours full charge' },
+            { label: 'Motor', value: 'Brushless (quiet)' },
+            { label: 'Display', value: 'LED — battery % & speed' },
+            { label: 'Weight', value: '~250g' },
+            { label: 'Head', value: '360° adjustable angle' },
+          ].map(({ label, value }) => (
+            <div key={label} className="flex justify-between text-xs">
+              <span className="text-muted-foreground">{label}</span>
+              <span className="font-medium text-foreground">{value}</span>
+            </div>
+          ))}
+          {details &&
+            Object.entries(details).map(([k, v]) => (
+              <div key={k} className="flex justify-between text-xs">
+                <span className="text-muted-foreground">{k}</span>
+                <span className="font-medium text-foreground">{v}</span>
+              </div>
+            ))}
+        </div>
+      </AccordionItem>
+
       <AccordionItem title="Shipping & Returns">
-        <ul className="space-y-2">
-          <li>Free standard shipping on orders over $75</li>
-          <li>Express shipping available at checkout</li>
+        <ul className="space-y-2 text-xs">
+          <li>Free standard shipping on orders over £40</li>
+          <li>Express 1–2 day delivery available at checkout</li>
           <li>Free returns within 30 days of delivery</li>
-          <li>Items must be unworn with original tags</li>
+          <li>Item must be in original packaging and unused</li>
+          <li>UK orders dispatched same day (Mon–Fri, orders before 2pm)</li>
         </ul>
       </AccordionItem>
 
-      <AccordionItem title="Care Instructions">
-        <ul className="space-y-2">
-          <li>Please refer to the care label on the product</li>
-          <li>Store in a cool, dry place away from direct sunlight</li>
-          <li>Handle with care to maintain product quality</li>
+      <AccordionItem title="Warranty & Support">
+        <ul className="space-y-2 text-xs">
+          <li>2-year full manufacturer warranty included</li>
+          <li>Covers all manufacturing defects and component failures</li>
+          <li>Contact us at support@coldsky.com for warranty claims</li>
+          <li>We aim to respond within 24 hours on business days</li>
         </ul>
       </AccordionItem>
     </div>

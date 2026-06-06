@@ -4,35 +4,32 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
+    /* coldSky — crisp arctic white + deep sky blue + electric cyan accent */
+    --background: 210 40% 98%;
+    --foreground: 215 40% 12%;
+    --muted: 210 30% 93%;
+    --muted-foreground: 215 20% 45%;
+    --accent: 198 95% 42%;
     --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+    --border: 210 20% 86%;
+    --ring: 198 95% 42%;
+    --primary: 215 60% 18%;
+    --primary-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
+    --background: 215 30% 8%;
+    --foreground: 210 30% 95%;
+    --muted: 215 25% 14%;
+    --muted-foreground: 210 20% 55%;
+    --accent: 198 95% 48%;
     --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --border: 215 20% 20%;
+    --ring: 198 95% 48%;
+    --primary: 210 30% 95%;
+    --primary-foreground: 215 30% 8%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,7 +69,7 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Brand color utilities */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
@@ -100,6 +97,26 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  /* coldSky gradient utilities */
+  .coldsky-gradient {
+    background: linear-gradient(135deg, hsl(215 60% 18%) 0%, hsl(198 95% 28%) 100%);
+  }
+
+  .coldsky-gradient-light {
+    background: linear-gradient(135deg, hsl(210 60% 96%) 0%, hsl(198 80% 92%) 100%);
+  }
+
+  .coldsky-text-gradient {
+    background: linear-gradient(135deg, hsl(215 60% 18%) 0%, hsl(198 95% 38%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .coldsky-cyan {
+    color: hsl(198 95% 42%);
+  }
 }
 
 /* Smooth scrolling */
@@ -109,7 +126,8 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background: hsl(198 95% 42% / 0.2);
+  color: hsl(215 40% 12%);
 }
 
 /* Focus styles */
@@ -129,6 +147,24 @@ html {
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(198 95% 42% / 0.4); }
+  50% { box-shadow: 0 0 0 8px hsl(198 95% 42% / 0); }
+}
+
+@keyframes slide-down {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 .animate-fade-in {
   animation: fade-in 0.3s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.4s ease-out;
 }
